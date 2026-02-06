@@ -19,10 +19,10 @@ int main(){
     int size = width * height * sizeof(unsigned char);
     unsigned char *input_matrix, *output_matrix;
 
-    cudaMalloc((void**)&input_matrix,size);
-    cudaMalloc((void**)&output_matrix,size);
+    cudaMallocManaged((void**)&input_matrix,size);
+    cudaMallocManaged((void**)&output_matrix,size);
 
-    cudaMemcpy(input_matrix,gray.data,size,cudaMemcpyHostToDevice);
+    memcpy(input_matrix,gray.data,size);
 
     dim3 threadsPerBlock(16,16);
     dim3 numBlocks((width + threadsPerBlock.x -1)/threadsPerBlock.x,(height + threadsPerBlock.y -1)/threadsPerBlock.y);
@@ -32,7 +32,7 @@ int main(){
     cudaDeviceSynchronize();
 
     cv::Mat blured(height,width,CV_8UC1);
-    cudaMemcpy(blured.data,output_matrix,size,cudaMemcpyDeviceToHost);
+    memcpy(blured.data,output_matrix,size);
 
     cv::imshow("frame",blured);
     cv::waitKey(0);
