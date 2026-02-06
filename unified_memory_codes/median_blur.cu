@@ -19,8 +19,8 @@ int main(){
     int size = width * height * sizeof(unsigned char);
     unsigned char *input_matrix, *output_matrix;
 
-    cudaMallocManaged((void**)&input_matrix,size);
-    cudaMallocManaged((void**)&output_matrix,size);
+    cudaMalloc((void**)&input_matrix,size);
+    cudaMalloc((void**)&output_matrix,size);
 
     cudaMemcpy(input_matrix,gray.data,size,cudaMemcpyHostToDevice);
 
