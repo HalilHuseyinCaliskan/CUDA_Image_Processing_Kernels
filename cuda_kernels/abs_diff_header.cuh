@@ -1,7 +1,7 @@
 #ifndef ABS_DIFF
 #define ABS_DIFF
 
-__global__ void abs_diff(unsigned char *input_matrix1, unsigned char input_matrix2, unsigned char *output_matrix, int width, int height){
+__global__ void abs_diff(unsigned char *input_matrix1, unsigned char *input_matrix2, unsigned char *output_matrix, int width, int height){
 
     int x_index = threadIdx.x + blockDim.x * blockIdx.x;
     int y_index = threadIdx.y + blockDim.y * blockIdx.y;
