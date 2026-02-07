@@ -1,6 +1,6 @@
 #include <iostream>
 #include <opencv2/opencv.hpp>
-#include "motion_detection_header"
+#include "motion_detection_header.cuh"
 
 int main(){
 
