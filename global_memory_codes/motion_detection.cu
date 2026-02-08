@@ -21,7 +21,11 @@ int main(){
 
     unsigned char threshold_value = 45;
     unsigned char target_value = 255;
-     
+
+    cudaEvent_t start, stop;
+    float time;
+    cudaEventCreate(&start);
+    cudaEventCreate(&stop);
 
     dim3 threadsPerBlock(16,16);
     dim3 numBlocks((width + threadsPerBlock.x -1)/threadsPerBlock.x,(height + threadsPerBlock.y -1)/threadsPerBlock.y);
@@ -58,7 +62,15 @@ int main(){
 
         cudaMemcpy(bgr_image,frame.data,bgr_image_size,cudaMemcpyHostToDevice);
 
+        cudaEventRecord(start);
+
         motion_detection<<<numBlocks,threadsPerBlock>>>(bgr_image,gray_image,blured_image,diffed_image,threshold_image,eroded_image,prev_image,width,height,threshold_value,target_value);
+
+        cudaEventRecord(stop);
+        cudaEventSynchronize(stop);
+        cudaEventElapsedTime(&time,start,stop);
+
+        std::cout<<"Kernel suresi: "<<time<<std::endl;
 
         cudaMemcpy(result.data,eroded_image,size,cudaMemcpyDeviceToHost);
 
@@ -75,6 +87,9 @@ int main(){
     cudaFree(threshold_image);
     cudaFree(eroded_image);
     cudaFree(prev_image);
+
+    cudaEventDestroy(start);
+    cudaEventDestroy(stop);
 
 }
 
