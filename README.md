@@ -23,7 +23,7 @@
  - Drawing Rectangle
  - Contour Detection
 
-   ## 📌 Sonuçlar
+## 📌 Sonuçlar
 RTX 3060'daki testlere göre CUDA'da kernel yazılarak hareket algılama pipeline'ının sonuçları:
   - 1920×1080 görüntüde 5 milisaniye
   - 2K görüntüde 6 milisaniye
