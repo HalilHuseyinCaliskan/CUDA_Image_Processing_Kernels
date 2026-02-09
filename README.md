@@ -1,1 +1,1 @@
-# CUDA_Image_Processing_Kernels
+# CUDA Tabanlı Görüntü İşleme Çekirdeklerinin Geliştirilmesi
