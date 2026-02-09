@@ -2,7 +2,7 @@
 
 ## 📌 Projenin Kapsamı
 - CUDA programlayarak görüntü işleme algoritmalarını sıfırdan geliştirmek.
-- CPU'da çalışan OpenCV gibi kütüphaneler yerine GPU'da paralel programlama yaparal C/C++ düzeyinde kernel tasarımı yapmak.
+- CPU'da çalışan OpenCV gibi kütüphaneler yerine GPU'da paralel programlama yaparak C/C++ düzeyinde kernel tasarımı yapmak.
 - GPU'daki bellek türlerine (global memory, unified memory) göre kernel'ların çalıştırılması.
 
  ## 📌 Geliştirilen CUDA Kernel'ları
