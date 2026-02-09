@@ -155,7 +155,7 @@ __global__ void motion_detection(unsigned char *bgr_image, unsigned char *gray_i
     gaussian_blur(gray_image,blured_image,width,height);
     abs_diff(blured_image,prev_image,diffed_image,width,height);
     binary_threshold(diffed_image,threshold_image,width,height,threshold_value,target_value);
-    erosion(threshold_image,eroded_image,width,height);
+    dilation(threshold_image,eroded_image,width,height);
     image_transfer(prev_image,blured_image,width,height);
     
 }
