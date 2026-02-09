@@ -96,7 +96,7 @@ __device__ void binary_threshold(unsigned char *input_matrix, unsigned char *out
 
 }
 
-__device__ void erosion(unsigned char *input_matrix, unsigned char *output_matrix, int width, int height){
+__device__ void dilation(unsigned char *input_matrix, unsigned char *output_matrix, int width, int height){
 
     int x_index = threadIdx.x + blockDim.x * blockIdx.x;
     int y_index = threadIdx.y + blockDim.y * blockIdx.y;
@@ -105,7 +105,7 @@ __device__ void erosion(unsigned char *input_matrix, unsigned char *output_matri
 
         int total_index = y_index * width + x_index;
 
-        int control = 255;
+        int control = 0;
 
         for(int i = -1; i <= 1; i++){
             for(int j = -1; j <=1; j++){
@@ -118,7 +118,7 @@ __device__ void erosion(unsigned char *input_matrix, unsigned char *output_matri
 
                 int current_value = input_matrix[control_y * width + control_x];
 
-                if (current_value < control){
+                if (current_value > control){
 
                     control = current_value;
                     break;
