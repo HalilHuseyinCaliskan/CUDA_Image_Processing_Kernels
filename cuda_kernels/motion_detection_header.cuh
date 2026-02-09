@@ -149,13 +149,13 @@ __device__ void image_transfer(unsigned char *prev_image, unsigned char *blured_
 }
 
 __global__ void motion_detection(unsigned char *bgr_image, unsigned char *gray_image, unsigned char *blured_image, unsigned char *diffed_image,
- unsigned char *threshold_image, unsigned char *eroded_image, unsigned char *prev_image, int width, int height, unsigned char threshold_value, unsigned char target_value){
+ unsigned char *threshold_image, unsigned char *dilated_image, unsigned char *prev_image, int width, int height, unsigned char threshold_value, unsigned char target_value){
 
     bgr_to_gray(bgr_image,gray_image,width,height);
     gaussian_blur(gray_image,blured_image,width,height);
     abs_diff(blured_image,prev_image,diffed_image,width,height);
     binary_threshold(diffed_image,threshold_image,width,height,threshold_value,target_value);
-    dilation(threshold_image,eroded_image,width,height);
+    dilation(threshold_image,dilated_image,width,height);
     image_transfer(prev_image,blured_image,width,height);
     
 }
