@@ -14,7 +14,7 @@ int main(){
     int width = 1920;
     int height = 1080;
 
-    unsigned char *bgr_image, *gray_image, *blured_image, *diffed_image, *threshold_image, *eroded_image, *prev_image;
+    unsigned char *bgr_image, *gray_image, *blured_image, *diffed_image, *threshold_image, *dilated_image, *prev_image;
 
     int bgr_image_size = width * height * 3 * sizeof(unsigned char);
     int size = width * height * sizeof(unsigned char);
@@ -35,7 +35,7 @@ int main(){
     cudaMalloc((void**)&blured_image,size);
     cudaMalloc((void**)&diffed_image,size);
     cudaMalloc((void**)&threshold_image,size);
-    cudaMalloc((void**)&eroded_image,size);
+    cudaMalloc((void**)&dilated_image,size);
     cudaMalloc((void**)&prev_image,size);
 
     cv::Mat frame, prev_;
@@ -60,20 +60,19 @@ int main(){
 
         cv::resize(frame,frame,cv::Size(1920,1080));
 
-        cudaMemcpy(bgr_image,frame.data,bgr_image_size,cudaMemcpyHostToDevice);
-
         cudaEventRecord(start);
 
-        motion_detection<<<numBlocks,threadsPerBlock>>>(bgr_image,gray_image,blured_image,diffed_image,threshold_image,eroded_image,prev_image,width,height,threshold_value,target_value);
+        cudaMemcpy(bgr_image,frame.data,bgr_image_size,cudaMemcpyHostToDevice);
+
+        motion_detection<<<numBlocks,threadsPerBlock>>>(bgr_image,gray_image,blured_image,diffed_image,threshold_image,dilated_image,prev_image,width,height,threshold_value,target_value);
+
+        cudaMemcpy(result.data,eroded_image,size,cudaMemcpyDeviceToHost);
 
         cudaEventRecord(stop);
         cudaEventSynchronize(stop);
         cudaEventElapsedTime(&time,start,stop);
 
-        std::cout<<"Kernel suresi: "<<time<<std::endl;
-
-        cudaMemcpy(result.data,eroded_image,size,cudaMemcpyDeviceToHost);
-
+        std::cout<<"Toplam sure: "<<time<<std::endl;
 
         cv::imshow("frame",result);
         cv::waitKey(1);
@@ -85,7 +84,7 @@ int main(){
     cudaFree(blured_image);
     cudaFree(diffed_image);
     cudaFree(threshold_image);
-    cudaFree(eroded_image);
+    cudaFree(dilated_image);
     cudaFree(prev_image);
 
     cudaEventDestroy(start);
