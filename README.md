@@ -24,8 +24,12 @@
  - Drawing Rectangle
  - Contour Detection
 
- ## 📌 GPU'daki Bellek Türleri
-CUDA ile yazılan 16 farklı görüntü işleme kernel'ı da hem global memory hem de unified memory için çalışır haldedir. Global memory de her bir iş parçacığının (thread) GPU'da DRAM bölümündeki adresleri ile indexleme yapılmıştır. Bu indexleme de thread numaraları, blok numaraları ve blok boyutları kullanılmıştır. Unified memory de ise CPU ve GPU aynı bellek alanını driver vasıtasıyla kullanmaktadır  bir diğer deyişle aynı pointer hem CPU hem de GPU için kullanılmaktadır. Ek olarak CUDA'da asenkron streaming ile farklı kerneller paralel bir şekil de çalıştırılmıştır. 
+ ## 📌 GPU'da Kullanılan Bellek Türleri
+- CUDA ile yazılan 16 farklı görüntü işleme kernel'ı da hem global memory hem de unified memory için çalışır haldedir.
+- Global memory de her bir iş parçacığının (thread) GPU'da DRAM bölümündeki adresleri ile indexleme yapılmıştır.
+- Bu indexleme de thread numaraları, blok numaraları ve blok boyutları kullanılmıştır.
+- Unified memory de ise CPU ve GPU aynı bellek alanını driver vasıtasıyla kullanmaktadır bir diğer deyişle aynı pointer hem CPU hem de GPU için kullanılmaktadır.
+- Proje kapsamında şuanlık pinned memory ve shared memory kullanılmamıştır.
 
 ## 📌 Sonuçlar
 RTX 3060 ve WSL ile yapılmış testlere göre CUDA'da kernel yazılarak hareketli nesne tespiti pipeline'ının sonuçları:
