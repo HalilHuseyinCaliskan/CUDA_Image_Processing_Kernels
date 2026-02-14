@@ -38,5 +38,5 @@ RTX 3060 ve WSL ile yapılmış testlere göre CUDA'da kernel yazılarak hareket
   - 4K görüntüde 15 milisaniye
 
  ## 📌 CUDA için Kaynaklar
-Aşağıdaki link, CUDA programlama konusunda yazılmış çok iyi bir kaynaktır. CUDA'yı hem donanım seviyesinde (CPU ile GPU'nun PCIe ve NVlink ile bağlantısını, SM blokları ile grid/block/thread hiyerarşisi ve thread indekslemenin nasıl yapılacağı, unified memory ile global memory arasındaki farkların neler olduğu, 32'lik threadlerden oluşan warp mantığını , CUDA toolkit ve L1/L2 Cache) anlatmakta olup hem de konuların anlaşılması için C++ ile örnek kodlar göstermektedir. Herkese tavsiye ederim. 
+Aşağıdaki link, CUDA programlama konusunda yazılmış çok iyi bir kaynaktır. CUDA'yı hem donanım seviyesinde (CPU ile GPU'nun PCIe ve NVlink ile bağlantısını, SM blokları ile grid/block/thread hiyerarşisi ve thread indekslemenin nasıl yapılacağı, unified memory ile global memory arasındaki farkların neler olduğu, 32'lik threadlerden oluşan warp mantığını , nvcc ile derlemenin nasıl yapılacağını, CUDA toolkit ve L1/L2 Cache) anlatmakta olup hem de konuların anlaşılması için C++ ile örnek kodlar göstermektedir. Herkese tavsiye ederim. 
 - https://docs.nvidia.com/cuda/cuda-programming-guide/index.html
