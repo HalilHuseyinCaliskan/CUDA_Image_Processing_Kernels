@@ -1,4 +1,4 @@
-contour_detection_header.cuh#ifndef CONTOUR_DETECTION
+#ifndef CONTOUR_DETECTION
 #define CONTOUR_DETECTION
 
 __global__ void contour_detection(unsigned char *input_matrix, unsigned char *binary_matrix,int width, int height){
